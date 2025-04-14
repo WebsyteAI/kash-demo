@@ -35,10 +35,12 @@ app.post('/generate-image', async (c) => {
   }
 });
 
-// Fetch Prodigi Orders
-app.get('/Orders', async (c) => {
+// Fetch Prodigi Product Details
+app.get('/product-details/:productId', async (c) => {
+  const productId = c.req.param('productId');
+
   try {
-    const response = await fetch('https://api.sandbox.prodigi.com/v4.0/orders', {
+    const response = await fetch(`https://api.sandbox.prodigi.com/v4.0/products/${productId}`, {
       method: 'GET',
       headers: {
         'X-API-Key': c.env.PRODIGI_API_KEY,
@@ -49,11 +51,11 @@ app.get('/Orders', async (c) => {
       throw new Error(`Prodigi API Error: ${response.statusText}`);
     }
 
-    const orders = await response.json();
-    return c.json(orders);
+    const productDetails = await response.json();
+    return c.json(productDetails);
   } catch (error) {
     console.error('Prodigi API Error:', error);
-    return c.json({ error: 'Failed to fetch orders', details: error.message }, 500);
+    return c.json({ error: 'Failed to fetch product details', details: error.message }, 500);
   }
 });
 

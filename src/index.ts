@@ -36,7 +36,7 @@ app.post('/generate-image', async (c) => {
 });
 
 // Fetch Prodigi Orders
-app.get('/orders', async (c) => {
+app.get('/Orders', async (c) => {
   try {
     const response = await fetch('https://api.sandbox.prodigi.com/v4.0/orders', {
       method: 'GET',

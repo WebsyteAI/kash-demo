@@ -1,30 +1,16 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { OpenAI } from 'openai';
-import Stripe from 'stripe';
-import sgMail from '@sendgrid/mail';
 
 interface Env {
   AI: Fetcher;
-  USER_DATA: KVNamespace;
   PRODIGI_API_KEY: string;
-  STRIPE_API_KEY: string;
-  SENDGRID_API_KEY: string;
-  APP_URL: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
 
 // Enable CORS
 app.use('*', cors());
-
-// Initialize Stripe and SendGrid
-app.use('*', async (c, next) => {
-  const stripe = new Stripe(c.env.STRIPE_API_KEY, { apiVersion: '2022-11-15' });
-  sgMail.setApiKey(c.env.SENDGRID_API_KEY);
-  c.set('stripe', stripe);
-  await next();
-});
 
 // AI Image Generation Endpoint
 app.post('/generate-image', async (c) => {
@@ -38,10 +24,14 @@ app.post('/generate-image', async (c) => {
       size: '1024x1024',
     });
 
+    if (!response.data || response.data.length === 0) {
+      throw new Error('No image generated');
+    }
+
     return c.json({ imageUrl: response.data[0].url });
   } catch (error) {
     console.error('AI Image Generation Error:', error);
-    return c.json({ error: 'Failed to generate image' }, 500);
+    return c.json({ error: 'Failed to generate image', details: error.message }, 500);
   }
 });
 
@@ -53,17 +43,15 @@ app.get('/products', async (c) => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch product catalog');
+      throw new Error(`Prodigi API Error: ${response.statusText}`);
     }
 
     const products = await response.json();
     return c.json(products);
   } catch (error) {
     console.error('Prodigi API Error:', error);
-    return c.json({ error: 'Failed to fetch products' }, 500);
+    return c.json({ error: 'Failed to fetch products', details: error.message }, 500);
   }
 });
-
-// Placeholder for additional routes (e.g., user accounts, checkout, etc.)
 
 export default app;

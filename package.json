@@ -6,7 +6,8 @@
     "hono": "^4",
     "wrangler": "^4",
     "stripe": "^12",
-    "@sendgrid/mail": "^7"
+    "@sendgrid/mail": "^7",
+    "openai": "^4"
   },
   "scripts": {
     "start": "wrangler dev",

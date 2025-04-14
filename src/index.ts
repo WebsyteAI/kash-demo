@@ -43,7 +43,7 @@ app.get('/product-details/:productId', async (c) => {
     const response = await fetch(`https://api.sandbox.prodigi.com/v4.0/products/${productId}`, {
       method: 'GET',
       headers: {
-        'X-API-Key': c.env.PRODIGI_API_KEY,
+        'Authorization': `Bearer ${c.env.PRODIGI_API_KEY}`,
       },
     });
 

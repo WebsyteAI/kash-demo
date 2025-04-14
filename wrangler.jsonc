@@ -5,7 +5,6 @@
   "compatibility_flags": ["nodejs_compat"],
   "ai": { "binding": "AI" },
   "vars": {
-    "PRODIGI_API_KEY": "",
     "STRIPE_API_KEY": "",
     "SENDGRID_API_KEY": "",
     "APP_URL": "https://kash-demo-pv.websyte.ai/"

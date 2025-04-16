@@ -35,12 +35,10 @@ app.post('/generate-image', async (c) => {
   }
 });
 
-// Fetch Prodigi Product Details (using X-API-Key header)
-app.get('/product-details/:productId', async (c) => {
-  const productId = c.req.param('productId');
-
+// Fetch Prodigi Product Details (hardcoded to GLOBAL-CAN-10x10)
+app.get('/product-details', async (c) => {
   try {
-    const response = await fetch(`https://api.sandbox.prodigi.com/v4.0/products/${productId}`, {
+    const response = await fetch('https://api.sandbox.prodigi.com/v4.0/products/GLOBAL-CAN-10x10', {
       method: 'GET',
       headers: {
         'X-API-Key': c.env.PRODIGI_API_KEY,

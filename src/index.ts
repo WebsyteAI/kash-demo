@@ -35,7 +35,7 @@ app.post('/generate-image', async (c) => {
   }
 });
 
-// Fetch Prodigi Product Details
+// Fetch Prodigi Product Details (using X-API-Key header)
 app.get('/product-details/:productId', async (c) => {
   const productId = c.req.param('productId');
 
@@ -43,7 +43,7 @@ app.get('/product-details/:productId', async (c) => {
     const response = await fetch(`https://api.sandbox.prodigi.com/v4.0/products/${productId}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${c.env.PRODIGI_API_KEY}`,
+        'X-API-Key': c.env.PRODIGI_API_KEY,
       },
     });
 

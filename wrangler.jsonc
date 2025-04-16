@@ -4,11 +4,6 @@
   "compatibility_date": "2025-03-07",
   "compatibility_flags": ["nodejs_compat"],
   "ai": { "binding": "AI" },
-  "vars": {
-    "STRIPE_API_KEY": "",
-    "SENDGRID_API_KEY": "",
-    "APP_URL": "https://kash-demo-pv.websyte.ai/"
-  },
   "observability": {
     "enabled": true
   }

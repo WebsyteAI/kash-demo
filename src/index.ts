@@ -35,10 +35,10 @@ app.post('/generate-image', async (c) => {
   }
 });
 
-// Fetch Prodigi Product Details (hardcoded to GLOBAL-CAN-10x10)
+// Fetch Prodigi Product Details (non-sandbox)
 app.get('/product-details', async (c) => {
   try {
-    const response = await fetch('https://api.sandbox.prodigi.com/v4.0/products/GLOBAL-CAN-10x10', {
+    const response = await fetch('https://api.prodigi.com/v4.0/products/GLOBAL-CAN-10x10', {
       method: 'GET',
       headers: {
         'X-API-Key': c.env.PRODIGI_API_KEY,

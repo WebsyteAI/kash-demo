@@ -18,7 +18,7 @@ export class ProdigiAgent extends Agent<Env> {
   async getProductDetails() {
     try {
       const resp = await fetch(
-        "https://api.sandbox.prodigi.com/v4.0/products/GLOBAL-CAN-10x10",
+        "https://api.prodigi.com/v4.0/products/GLOBAL-CAN-10x10",
         {
           method: "GET",
           headers: {

@@ -5,9 +5,11 @@
   "dependencies": {
     "hono": "^4",
     "wrangler": "^4",
-    "stripe": "^12",
-    "@sendgrid/mail": "^7",
-    "openai": "^4"
+    "agents": "^0.0.46",
+    "ai": "^4.2.8",
+    "zod": "^3.24.2",
+    "openai": "^4.0.0",
+    "workers-ai-provider": "^0.2.0"
   },
   "scripts": {
     "start": "wrangler dev",
